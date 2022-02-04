@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Movies.Contracts
 {
-	public class SampleDataModel
+	public class MovieDataModel
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

@@ -6,7 +6,7 @@ namespace Movies.Server.Gql.App
 {
 	public class AppGraphQuery : ObjectGraphType
 	{
-		public AppGraphQuery(ISampleGrainClient sampleClient)
+		public AppGraphQuery(IMovieGrainClient sampleClient)
 		{
 			Name = "AppQueries";
 

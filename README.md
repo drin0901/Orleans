@@ -15,7 +15,7 @@ The application has the following functionality:
   - Search - DONE
   - Filter by Genre - DONE
 - **Movie detail**
-  - Display selected movie detail information
+  - Display selected movie detail information - DONE
 - **Create Movie**
   - Create a new movie that can be retrieved in the movies list - DONE
 - **Update Movie**

@@ -3,7 +3,7 @@ using Movies.Contracts;
 
 namespace Movies.Server.Gql.Types
 {
-	public class SampleDataGraphType : ObjectGraphType<SampleDataModel>
+	public class SampleDataGraphType : ObjectGraphType<MovieDataModel>
 	{
 		public SampleDataGraphType()
 		{

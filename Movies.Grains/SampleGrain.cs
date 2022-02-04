@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 namespace Movies.Grains
 {
 	[StorageProvider(ProviderName = "Default")]
-	public class SampleGrain : Grain<SampleDataModel>, ISampleGrain
+	public class SampleGrain : Grain<MovieDataModel>, IMovieGrain
 	{
-		public Task<SampleDataModel> Get()
+		public Task<MovieDataModel> Get()
 			=> Task.FromResult(State);
 
 		public Task Set(string name)
 		{
-			State = new SampleDataModel { Id = this.GetPrimaryKeyString(), Name = name };
+			State = new MovieDataModel { Id = this.GetPrimaryKeyString(), Name = name };
 			return Task.CompletedTask;
 		}
 	}

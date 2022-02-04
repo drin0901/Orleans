@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Movies.Core;
 using Movies.GrainClients;
 using Movies.Server.Gql;
@@ -49,11 +50,37 @@ namespace Movies.Server
 				options.AllowSynchronousIO = true;
 			});
 
+			services.AddSwaggerGen(options =>
+			{
+				options.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Title = "Orleans - Movie Indexing API",
+					Version = "v1",
+					Description = "The application is an API for movies indexing application",
+				});
+				options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+				{
+					Type = SecuritySchemeType.Http,
+					Scheme = "bearer",
+					BearerFormat = "JWT",
+					Description = "JWT Authorization header using the Bearer scheme."
+				});
+				options.AddSecurityRequirement(new OpenApiSecurityRequirement
+				{
+						{
+							new OpenApiSecurityScheme
+							{
+								Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth" }
+							},
+							new string[] {}
+						}
+				});
+			});
+
 			services.AddAppClients();
 			services.AddAppGraphQL();
 			services.AddControllers()
 			.AddNewtonsoftJson();
-			services.AddSwaggerGen();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
