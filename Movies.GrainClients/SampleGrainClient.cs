@@ -10,7 +10,6 @@ namespace Movies.GrainClients
 	public class SampleGrainClient : IMovieGrainClient
 	{
 		private readonly IGrainFactory _grainFactory;
-		MovieDataModel _dbContext;
 
 		public SampleGrainClient(
 			IGrainFactory grainFactory
@@ -31,13 +30,37 @@ namespace Movies.GrainClients
 			return grain.Set(name);
 		}
 
-		public async Task<MovieDataModel> GetByKey(string key) => await Task.FromResult(MovieDataService.GetById(key));
+		public async Task<MovieDataModel> GetByKey(string key) 
+		{
+			Console.WriteLine(">>> Movie::Getting Movie By ID");
+			var result = await Task.FromResult(MovieDataService.GetById(key));
 
-		public async Task<List<MovieDataModel>> GetListMovies() => await Task.FromResult(MovieDataService.GetListMovies());
+			return result;
+		}
 
-		public async Task<IEnumerable<MovieDataModel>> GetTopMovies() => await Task.FromResult(MovieDataService.GetTopMovies());
+		public async Task<List<MovieDataModel>> GetListMovies()
+		{
+			Console.WriteLine(">>> Movie::Getting All List of Movies");
+			var result = await Task.FromResult(MovieDataService.GetListMovies());
 
-		public async Task<IEnumerable<MovieDataModel>> GetByGenre(string genre) => await Task.FromResult(MovieDataService.GetByGenre(genre));
+			return result;
+		}
+
+		public async Task<IEnumerable<MovieDataModel>> GetTopMovies()
+		{
+			Console.WriteLine(">>> Movie::Getting Top 5 Movies");
+			var result = await Task.FromResult(MovieDataService.GetTopMovies());
+
+			return result;
+		}
+
+		public async Task<IEnumerable<MovieDataModel>> GetByGenre(string genre)
+		{
+			Console.WriteLine(">>> Movie::Getting Movies by Genre");
+			var result = await Task.FromResult(MovieDataService.GetByGenre(genre));
+
+			return result;
+		}
 
 		public async Task<MovieDataModel> AddMovie(MovieDataModel obj)
 		{
@@ -50,8 +73,11 @@ namespace Movies.GrainClients
 
 		public async Task<MovieDataModel> EditMovie(MovieDataModel obj)
 		{
-			Console.WriteLine(">>> Movie::Adding Movie");
-			var movie = MovieDataService.GetListMovies();
+			Console.WriteLine(">>> Movie::Editing Movie");
+			var movie = MovieDataService.GetById(obj.Id);
+			var listMovie = MovieDataService.GetListMovies();
+			listMovie.Remove(movie);
+			listMovie.Add(obj);
 
 			return await Task.FromResult(obj);
 		}
