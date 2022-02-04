@@ -7,7 +7,7 @@ namespace Movies.GrainClients
 	{
 		public static void AddAppClients(this IServiceCollection services)
 		{
-			services.AddSingleton<IMovieGrainClient, SampleGrainClient>();
+			services.AddSingleton<IMovieGrainClient, MoviesGrainClient>();
 		}
 	}
 }

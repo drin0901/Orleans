@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Movies.Grains
 {
 	[StorageProvider(ProviderName = "Default")]
-	public class SampleGrain : Grain<MovieDataModel>, IMovieGrain
+	public class MoviesGrain : Grain<MovieDataModel>, IMovieGrain
 	{
 		public Task<MovieDataModel> Get()
 			=> Task.FromResult(State);

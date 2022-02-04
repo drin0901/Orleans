@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Movies.GrainClients
 {
-	public class SampleGrainClient : IMovieGrainClient
+	public class MoviesGrainClient : IMovieGrainClient
 	{
 		private readonly IGrainFactory _grainFactory;
 
-		public SampleGrainClient(
+		public MoviesGrainClient(
 			IGrainFactory grainFactory
 		)
 		{
