@@ -15,7 +15,7 @@ namespace Movies.Server.Gql.App
 				{
 					Name = "id"
 				}),
-				resolve: ctx => sampleClient.GetByKey(ctx.Arguments["id"].ToString())
+				resolve: ctx => sampleClient.GetByKey((int)ctx.Arguments["id"])
 			);
 
 			Field<SampleDataGraphType>("GetListMovies",

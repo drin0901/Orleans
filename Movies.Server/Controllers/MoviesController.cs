@@ -38,7 +38,7 @@ namespace Movies.Server.Controllers
 
 		// GET api/GetMovieById/1234
 		[HttpGet("GetMovieById")]
-		public async Task<MovieDataModel> GetMovieById(string id)
+		public async Task<MovieDataModel> GetMovieById(int id)
 		{
 			var result = await _client.GetByKey(id).ConfigureAwait(false);
 

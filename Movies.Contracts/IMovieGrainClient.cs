@@ -9,7 +9,7 @@ namespace Movies.Contracts
 		Task Set(string key, string name);
 		Task<IEnumerable<MovieDataModel>> GetTopMovies();
 		Task<List<MovieDataModel>> GetListMovies();
-		Task<MovieDataModel> GetByKey(string id);
+		Task<MovieDataModel> GetByKey(int id);
 		Task<IEnumerable<MovieDataModel>> GetByGenre(string genre);
 		Task<MovieDataModel> AddMovie(MovieDataModel obj);
 		Task<MovieDataModel> EditMovie(MovieDataModel obj);

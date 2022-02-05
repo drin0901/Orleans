@@ -30,7 +30,7 @@ namespace Movies.GrainClients
 			return grain.Set(name);
 		}
 
-		public async Task<MovieDataModel> GetByKey(string key) 
+		public async Task<MovieDataModel> GetByKey(int key) 
 		{
 			Console.WriteLine(">>> Movie::Getting Movie By ID");
 			var result = await Task.FromResult(MovieDataService.GetById(key));
@@ -65,6 +65,7 @@ namespace Movies.GrainClients
 		public async Task<MovieDataModel> AddMovie(MovieDataModel obj)
 		{
 			Console.WriteLine(">>> Movie::Adding Movie");
+			obj.Id = MovieDataService.AutoNumberId();
 			var movie = MovieDataService.GetListMovies();
 			movie.Add(obj);
 

@@ -11,7 +11,9 @@ namespace OlreansMovies.Tests
     [TestClass]
     public class MovieTest
     {
-        [TestMethod]
+		private Task<List<MovieDataModel>> GetMoviesData() => Task.FromResult(MovieDataService.GetListMovies());
+
+		[TestMethod]
         public void GetListMovies_ValidCall()
         {
 			using (var mock = AutoMock.GetLoose())
@@ -52,6 +54,46 @@ namespace OlreansMovies.Tests
 			}
 		}
 
-		private Task<List<MovieDataModel>> GetMoviesData() => Task.FromResult(MovieDataService.GetListMovies());
+		[TestMethod]
+		public void GetByKey_ValidCall()
+		{
+			using (var mock = AutoMock.GetLoose())
+			{
+				int id = 1;
+				//Arrange
+				mock.Mock<IMovieGrainClient>()
+					.Setup(x => x.GetByKey(id));
+
+				//Act
+				var ctr = mock.Create<MoviesGrainClient>();
+				var expected = Task.FromResult(MovieDataService.GetById(id));
+				var actual = ctr.GetByKey(id);
+
+				//Assert
+				Assert.IsTrue(actual != null);
+				Assert.AreEqual(expected.Result, actual.Result, "Getting Movie By Key is incorrect");
+			}
+		}
+
+		[TestMethod]
+		public void GetByGenre_ValidCall()
+		{
+			using (var mock = AutoMock.GetLoose())
+			{
+				var genre = "";
+				//Arrange
+				mock.Mock<IMovieGrainClient>()
+					.Setup(x => x.GetByGenre(genre));
+
+				//Act
+				var ctr = mock.Create<MoviesGrainClient>();
+				var expected = MovieDataService.GetByGenre(genre);
+				var actual = ctr.GetByGenre(genre);
+
+				//Assert
+				Assert.IsTrue(actual != null);
+				Assert.AreEqual(expected.Count(), actual.Result.Count(), "Getting Movie By Genre is incorrect");
+			}
+		}
 	}
 }

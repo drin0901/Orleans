@@ -1,6 +1,7 @@
 ﻿using Movies.Contracts;
 using Orleans;
 using Orleans.Providers;
+using System;
 using System.Threading.Tasks;
 
 namespace Movies.Grains
@@ -13,7 +14,7 @@ namespace Movies.Grains
 
 		public Task Set(string name)
 		{
-			State = new MovieDataModel { Id = this.GetPrimaryKeyString(), Name = name };
+			State = new MovieDataModel { Id = Convert.ToInt32(this.GetPrimaryKeyString()), Name = name };
 			return Task.CompletedTask;
 		}
 	}
