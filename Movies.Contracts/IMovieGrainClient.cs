@@ -13,5 +13,6 @@ namespace Movies.Contracts
 		Task<IEnumerable<MovieDataModel>> GetByGenre(string genre);
 		Task<MovieDataModel> AddMovie(MovieDataModel obj);
 		Task<MovieDataModel> EditMovie(MovieDataModel obj);
+		Task<MovieDataModel> DeleteMovie(int id);
 	}
 }

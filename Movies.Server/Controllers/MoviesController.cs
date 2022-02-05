@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movies.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,6 +69,14 @@ namespace Movies.Server.Controllers
 		public async Task<MovieDataModel> EditMovie(MovieDataModel objMovie)
 		{
 			var result = await _client.EditMovie(objMovie).ConfigureAwait(false);
+
+			return result;
+		}
+
+		[HttpDelete("Delete Movie")]
+		public async Task<MovieDataModel> DeleteMovie(string Id)
+		{
+			var result = await _client.DeleteMovie(Convert.ToInt32(Id)).ConfigureAwait(false);
 
 			return result;
 		}

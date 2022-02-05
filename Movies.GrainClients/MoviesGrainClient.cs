@@ -82,5 +82,15 @@ namespace Movies.GrainClients
 
 			return await Task.FromResult(obj);
 		}
+
+		public async Task<MovieDataModel> DeleteMovie(int id)
+		{
+			Console.WriteLine(">>> Movie::Deleting Movie");
+			var movie = MovieDataService.GetById(id);
+			var listMovie = MovieDataService.GetListMovies();
+			listMovie.Remove(movie);
+
+			return await Task.FromResult(movie);
+		}
 	}
 }
