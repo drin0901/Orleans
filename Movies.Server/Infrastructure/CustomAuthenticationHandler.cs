@@ -13,7 +13,7 @@ namespace Movies.Server.Infrastructure
 {
 	public class CustomAuthenticationHandler : AuthenticationHandler<JwtBearerOptions>
 	{
-		public const string Authorization = "token";
+		public const string Authorization = "Authorization";
 		public const string TokenInvalid = "TokenInvalid";
 		public static string SecretKey = "orleans-test";
 
@@ -32,10 +32,12 @@ namespace Movies.Server.Infrastructure
 				? Request.Headers[Authorization]
 				: Request.Query[Authorization];
 
-			if (string.IsNullOrEmpty(token))
+			var credentials = token.Split(' ')[1];
+
+			if (string.IsNullOrEmpty(credentials))
 				return AuthenticateResult.NoResult();
 
-			var provider = await GetByKey(token);
+			var provider = await GetByKey(credentials);
 			if (provider == null)
 				return AuthenticateResult.Fail(TokenInvalid);
 
@@ -55,15 +57,15 @@ namespace Movies.Server.Infrastructure
 		{
 			new AuthModel
 			{
-				Id = "cla",
-				Name = "clayton",
-				Key = "cla-key"
+				Id = "rt",
+				Name = "river tech",
+				Key = "rivertech-key"
 			},
 			new AuthModel
 			{
-				Id = "ste",
-				Name = "stephen",
-				Key = "ste-key"
+				Id = "aldrin",
+				Name = "angeles",
+				Key = "gadiano"
 			},
 		};
 

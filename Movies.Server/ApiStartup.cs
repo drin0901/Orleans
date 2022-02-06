@@ -20,9 +20,11 @@ namespace Movies.Server
 		private readonly IConfiguration _configuration;
 		private readonly IAppInfo _appInfo;
 
+
 		public ApiStartup(
 			IConfiguration configuration,
 			IAppInfo appInfo
+			
 		)
 		{
 			_configuration = configuration;
@@ -60,8 +62,10 @@ namespace Movies.Server
 				});
 				options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
 				{
+					Name = "Authorization",
 					Type = SecuritySchemeType.Http,
 					Scheme = "bearer",
+					In = ParameterLocation.Header,
 					BearerFormat = "JWT",
 					Description = "JWT Authorization header using the Bearer scheme."
 				});
@@ -77,6 +81,7 @@ namespace Movies.Server
 				});
 			});
 
+			services.AddRouting();
 			services.AddAppClients();
 			services.AddAppGraphQL();
 			services.AddControllers()
@@ -113,6 +118,7 @@ namespace Movies.Server
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
