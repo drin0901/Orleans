@@ -66,6 +66,7 @@ namespace Movies.GrainClients
 		{
 			Console.WriteLine(">>> Movie::Adding Movie");
 			obj.Id = MovieDataService.AutoNumberId();
+			obj.Genres = obj.Genres.ConvertAll(x => x.ToLower());
 			var movie = MovieDataService.GetListMovies();
 			movie.Add(obj);
 

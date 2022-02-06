@@ -2,7 +2,7 @@
 **Version: 1.0**
 ## About the App
 
-The application is a movies indexing application that has a functionality to list movies, list top movies, add, edit and search movies based on movie id/name details.
+The application is a movies indexing application that has a functionality to list movies, list top movies, add, edit, delete and search movies based on movie id/name details.
 
 ### Technologies used
 

@@ -51,7 +51,7 @@ namespace Movies.Contracts
 
 		public static IEnumerable<MovieDataModel> GetByGenre(string genre)
 		{
-			var listMovies = Movies.Where(x => x.Genres.Contains(genre)).ToList();
+			var listMovies = Movies.Where(x => x.Genres.Contains(genre.ToLower())).ToList();
 
 			return listMovies;
 		}

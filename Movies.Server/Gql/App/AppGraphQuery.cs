@@ -1,45 +1,46 @@
 ﻿using GraphQL.Types;
 using Movies.Contracts;
 using Movies.Server.Gql.Types;
+using System;
 
 namespace Movies.Server.Gql.App
 {
 	public class AppGraphQuery : ObjectGraphType
 	{
-		public AppGraphQuery(IMovieGrainClient sampleClient)
+		public AppGraphQuery(IMovieGrainClient movieClient)
 		{
 			Name = "AppQueries";
 
-			Field<SampleDataGraphType>("GetByKey",
+			Field<MovieDataGraphType>("GetByKey",
 				arguments: new QueryArguments(new QueryArgument<StringGraphType>
 				{
 					Name = "id"
 				}),
-				resolve: ctx => sampleClient.GetByKey((int)ctx.Arguments["id"])
+				resolve: ctx => movieClient.GetByKey(Convert.ToInt32(ctx.Arguments["id"]))
 			);
 
-			Field<SampleDataGraphType>("GetListMovies",
+			Field<ListGraphType<MovieDataGraphType>>("GetListMovies",
 				arguments: new QueryArguments(new QueryArgument<StringGraphType>
 				{
 					Name = "id"
 				}),
-				resolve: ctx => sampleClient.GetListMovies()
+				resolve: ctx => movieClient.GetListMovies()
 			);
 
-			Field<SampleDataGraphType>("GetTopMovies",
+			Field<ListGraphType<MovieDataGraphType>>("GetTopMovies",
 				arguments: new QueryArguments(new QueryArgument<StringGraphType>
 				{
 					Name = "id"
 				}),
-				resolve: ctx => sampleClient.GetTopMovies()
+				resolve: ctx => movieClient.GetTopMovies()
 			);
 
-			Field<SampleDataGraphType>("GetByGenre",
+			Field<ListGraphType<MovieDataGraphType>> ("GetByGenre",
 				arguments: new QueryArguments(new QueryArgument<StringGraphType>
 				{
-					Name = "id"
+					Name = "genre"
 				}),
-				resolve: ctx => sampleClient.GetByGenre(ctx.Arguments["genre"].ToString())
+				resolve: ctx => movieClient.GetByGenre(ctx.Arguments["genre"].ToString())
 			);
 		}
 	}
