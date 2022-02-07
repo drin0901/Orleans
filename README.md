@@ -19,3 +19,4 @@ The application is a movies indexing application that has a functionality to lis
 - Open the project using Visual Studio 2017 or higher
 - Make sure the startup project is set to `Movies.Server`
 - Run the project and browse it using this URL: http://localhost:6600/swagger
+- Please Login with this Authorized value: "rivertech-key" before trying out the API functions.
