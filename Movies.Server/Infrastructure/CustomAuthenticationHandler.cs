@@ -32,10 +32,10 @@ namespace Movies.Server.Infrastructure
 				? Request.Headers[Authorization]
 				: Request.Query[Authorization];
 
-			var credentials = token.Split(' ')[1];
-
-			if (string.IsNullOrEmpty(credentials))
+			if (string.IsNullOrEmpty(token))
 				return AuthenticateResult.NoResult();
+
+			var credentials = token.Split(' ')[1];
 
 			var provider = await GetByKey(credentials);
 			if (provider == null)
